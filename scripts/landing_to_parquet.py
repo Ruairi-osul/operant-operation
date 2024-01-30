@@ -12,6 +12,7 @@ OUTPUT_RAW_CA_FILENAME = "raw_calcium.parquet"
 OUTPUT_DECONV_CA_FILENAME = "deconv_calcium.parquet"
 OUTPUT_MOTION_FILENAME = "motion_tracking.parquet"
 
+
 class FileProcessor:
     def __init__(
         self,
@@ -203,7 +204,6 @@ class MotionProcessor(FileProcessor):
     @staticmethod
     def round_rime(df: pd.DataFrame) -> pd.DataFrame:
         return df.assign(time=lambda x: x.time.round(1))
-    
 
     @staticmethod
     def add_velocity(
@@ -228,7 +228,7 @@ class MotionProcessor(FileProcessor):
         return df_sorted
 
     def select_cols(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df[["frame_idx", "time",  "x", "y",  "velocity"]]
+        return df[["frame_idx", "time", "x", "y", "velocity"]]
 
     def process_df(self, df: pd.DataFrame) -> pd.DataFrame:
         df1 = self.rename_cols(df)
@@ -248,6 +248,7 @@ def process_events(input_dir, output_dir) -> List[Path]:
         output_dir,
     )
     return processed_event_paths
+
 
 def process_deconv_calcium(input_dir, output_dir) -> List[Path]:
     deconv_calcium_processor = DeconvCaProcessor(
@@ -284,6 +285,7 @@ def process_motion_tracking(input_dir, output_dir) -> List[Path]:
         output_dir,
     )
     return processed_motion_paths
+
 
 def main():
     _ = process_events(input_dir=LANDING_DIR, output_dir=RAW_DIR)
