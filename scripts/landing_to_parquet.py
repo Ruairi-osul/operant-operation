@@ -199,6 +199,10 @@ class MotionProcessor(FileProcessor):
         return df.rename(
             columns=dict(x_pix="x", y_pix="y", idx_time="time", idx_frame="frame_idx")
         )
+
+    @staticmethod
+    def round_rime(df: pd.DataFrame) -> pd.DataFrame:
+        return df.assign(time=lambda x: x.time.round(1))
     
 
     @staticmethod
@@ -224,10 +228,11 @@ class MotionProcessor(FileProcessor):
         return df_sorted
 
     def select_cols(self, df: pd.DataFrame) -> pd.DataFrame:
-        return df[["x", "y", "time", "frame_idx", "velocity"]]
+        return df[["frame_idx", "time",  "x", "y",  "velocity"]]
 
     def process_df(self, df: pd.DataFrame) -> pd.DataFrame:
         df1 = self.rename_cols(df)
+        df1 = self.round_rime(df1)
         df2 = self.add_velocity(df1)
         df3 = self.select_cols(df2)
         return df3
