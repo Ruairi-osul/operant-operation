@@ -10,3 +10,5 @@ seaborn
 statsmodels
 python-dotenv
 plotly
+calcium_clear @ git+https://github.com/Ruairi-osul/calcium-clear.git
+trace_minder @ git+https://github.com/Ruairi-osul/trace-minder.git
