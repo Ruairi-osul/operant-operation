@@ -2,3 +2,4 @@
 data
 *.egg*
 __pycache__
+.ruff*

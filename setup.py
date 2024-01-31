@@ -10,7 +10,7 @@ def read_requirements():
 
 
 setup(
-    name="Operant-Operation",
+    name="operant-operation",
     version="0.1",
     packages=find_packages(),
     python_requires=">=3.11",
